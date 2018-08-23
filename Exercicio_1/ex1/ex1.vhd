@@ -22,6 +22,6 @@ BEGIN
 		      '1';
 				
 	all_out <= '1' WHEN (a_in AND b_in AND c_in AND d_in)='1' ELSE
-				  '0';
+			   '0';
 
 END ARCHITECTURE;

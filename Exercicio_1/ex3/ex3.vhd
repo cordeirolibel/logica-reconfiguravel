@@ -12,7 +12,7 @@ ARCHITECTURE ex3 OF ex3 IS
 
 BEGIN
 	one_hot_out <= "0001" WHEN sel="00" ELSE
-		            "0010" WHEN sel="01" ELSE
-						"0100" WHEN sel="10" ELSE
-						"1000";
+		           "0010" WHEN sel="01" ELSE
+				   "0100" WHEN sel="10" ELSE
+				   "1000";
 END ARCHITECTURE;
