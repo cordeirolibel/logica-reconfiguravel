@@ -13,11 +13,11 @@ ENTITY ex0 IS
 		saida: OUT STD_LOGIC_VECTOR (3 DOWNTO 0)
 		);
 		
-	SIGNAL s_saida: STD_LOGIC_VECTOR (3 DOWNTO 0);
+	
 END ENTITY;
 
 ARCHITECTURE ex0 OF ex0 IS
-
+	SIGNAL s_saida: STD_LOGIC_VECTOR (3 DOWNTO 0);
 BEGIN
 
 	s_saida(3) <= ent(3);

@@ -12,26 +12,26 @@
 # Altera or its authorized distributors.  Please refer to the 
 # applicable agreement for further details.
 
-# Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-# File: C:\Users\Andreas\Dropbox\UTFPR\2018-2\Lógica Reconfigurável\Atividades\Lab 02\chave2ssd\chave2ssd.csv
-# Generated on: Wed Aug 29 18:16:19 2018
+# Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+# File: C:\Users\gusta\Documents\MEGA\EngdeComputacao\Logica_Rec\Exercicios LR\Exercicio_2\ex2\chave2ssd\chave2ssd.csv
+# Generated on: Wed Aug 29 18:48:32 2018
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
 
-To,Direction,Location,I/O Bank,VREF Group,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
-seg_out[6],Output,PIN_F13,7,B7_N1,,,,,
-seg_out[5],Output,PIN_F12,7,B7_N1,,,,,
-seg_out[4],Output,PIN_G12,7,B7_N1,,,,,
-seg_out[3],Output,PIN_H13,7,B7_N1,,,,,
-seg_out[2],Output,PIN_H12,7,B7_N1,,,,,
-seg_out[1],Output,PIN_F11,7,B7_N1,,,,,
-seg_out[0],Output,PIN_E11,7,B7_N1,,,,,
-sw0,Input,PIN_J6,1,B1_N0,,,,,
-sw1,Input,PIN_H5,1,B1_N0,,,,,
-sw2,Input,PIN_H6,1,B1_N0,,,,,
-sw3,Input,PIN_G4,1,B1_N0,,,,,
-sw4,Input,PIN_G5,1,B1_N0,,,,,
-sw5,Input,PIN_J7,1,B1_N1,,,,,
-sw6,Input,PIN_H7,1,B1_N0,,,,,
-sw7,Input,PIN_E3,1,B1_N0,,,,,
-sw8,Input,PIN_E4,1,B1_N0,,,,,
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
+seg_out[6],Output,PIN_E11,7,B7_N1,PIN_E11,,,,,
+seg_out[5],Output,PIN_F11,7,B7_N1,PIN_F11,,,,,
+seg_out[4],Output,PIN_H12,7,B7_N1,PIN_G12,,,,,
+seg_out[3],Output,PIN_H13,7,B7_N1,PIN_H13,,,,,
+seg_out[2],Output,PIN_G12,7,B7_N1,PIN_H12,,,,,
+seg_out[1],Output,PIN_F12,7,B7_N1,PIN_F12,,,,,
+seg_out[0],Output,PIN_F13,7,B7_N1,PIN_F13,,,,,
+sw0,Input,PIN_J6,1,B1_N0,PIN_J6,,,,,
+sw1,Input,PIN_H5,1,B1_N0,PIN_H5,,,,,
+sw2,Input,PIN_H6,1,B1_N0,PIN_H6,,,,,
+sw3,Input,PIN_G4,1,B1_N0,PIN_G4,,,,,
+sw4,Input,PIN_G5,1,B1_N0,PIN_G5,,,,,
+sw5,Input,PIN_J7,1,B1_N1,PIN_J7,,,,,
+sw6,Input,PIN_H7,1,B1_N0,PIN_H7,,,,,
+sw7,Input,PIN_E3,1,B1_N0,PIN_E3,,,,,
+sw8,Input,PIN_E4,1,B1_N0,PIN_E4,,,,,
