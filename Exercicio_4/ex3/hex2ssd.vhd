@@ -6,14 +6,14 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
-ENTITY dec2ssd IS
+ENTITY hex2ssd IS
 	PORT (
 		ent: IN STD_LOGIC_VECTOR (3 DOWNTO 0);
 		saida: OUT STD_LOGIC_VECTOR (6 DOWNTO 0)
 		);
 END ENTITY;
 
-ARCHITECTURE dec2ssd OF dec2ssd IS
+ARCHITECTURE hex2ssd OF hex2ssd IS
 
 BEGIN
 
