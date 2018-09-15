@@ -9,6 +9,8 @@ USE IEEE.STD_LOGIC_SIGNED.ALL;
 --USE ieee.numeric_std.ALL;
 USE ieee.Std_Logic_Arith.ALL;
 
+
+
 ------------------------------
 ENTITY chaves2hex IS
 	GENERIC(
