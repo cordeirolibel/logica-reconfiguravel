@@ -1,15 +1,35 @@
  
------------------------------------------
--- Codificacao para display 7 segmentos
--- hexa to SSD
-
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 --USE IEEE.STD_LOGIC_SIGNED.ALL;
 --USE ieee.Std_Logic_Arith.ALL;
 USE ieee.numeric_std.all;
 use IEEE.math_real.all;
---use IEEE.math_real.log2;
+
+-----------------------------------------------------------
+-- L = numero de LEDs
+-- S = numero de SSDs
+-- C = numero de chaves
+-- B = numero de botoes
+--
+-- MAX_R = C*2^B    <= resultado maximo
+-- MAX_L = 2^L-1  <= valor maximo representado pelos LEDs
+-- MAX_S = 16^S-1 <= valor maximo representado pelos SSDs
+--
+-- MAX_L >= MAX_R
+-- 2^L-1 >= C*2^B
+-- 2^L   >=  C*2^B+1
+-- L >= lg(C*2^B+1)
+-- L = ceil(lg(C*2^B+1))
+--
+-- MAX_S  >= MAX_R
+-- 16^S-1 >= C*2^B
+-- 16^S   >= C*2^B+1
+-- 2^(4S) >=  C*2^B
+-- 4S >= lg(C*2^B+1)
+-- S = ceil(lg(C*2^B+1)/4)
+-----------------------------------------------------------
+
 
 ENTITY ex3 IS
 	
@@ -25,16 +45,17 @@ ENTITY ex3 IS
 		botoes: IN STD_LOGIC_VECTOR (N_BOTOES-1 DOWNTO 0);
 		
 		--o_ssds: OUT STD_LOGIC_VECTOR(integer(ceil(log2(real((N_CHAVES*(2**N_BOTOES))+1))/log2(16)))*7-1 DOWNTO 0);
-		o_ssds: OUT STD_LOGIC_VECTOR(natural(ceil(log2(real((N_CHAVES*(2**N_BOTOES))+1))/real(4)))*7-1 DOWNTO 0);
-		leds: OUT STD_LOGIC_VECTOR (natural(ceil(log2(real(N_CHAVES*2**N_BOTOES+1)))-real(1)) DOWNTO 0)
+		o_ssds: OUT STD_LOGIC_VECTOR(integer(ceil(log2(real(N_CHAVES)*2**real(N_BOTOES)+real(1))/real(4)))*7-1 DOWNTO 0);
+		leds: OUT STD_LOGIC_VECTOR (integer(ceil(log2(real(N_CHAVES)*2**real(N_BOTOES)+real(1)))) DOWNTO 0)
 		);
 		
 END ENTITY;
 
 ARCHITECTURE ex3 OF ex3 IS
-
-	CONSTANT N_SSDS: INTEGER := natural(ceil(log2(real((N_CHAVES*(2**N_BOTOES))+1))/real(4)))*7-1;
-	CONSTANT N_LEDS: INTEGER := natural(ceil(log2(real(N_CHAVES*2**N_BOTOES+1)))-real(1));
+	--ceil(lg(C*2^B+1)/4)
+	CONSTANT N_SSDS: INTEGER := integer(ceil(log2(real(N_CHAVES)*2**real(N_BOTOES)+real(1))/real(4)));
+	--ceil(lg(C*2^B+1))
+	CONSTANT N_LEDS: INTEGER := integer(ceil(log2(real(N_CHAVES)*2**real(N_BOTOES)+real(1))));
 
 
 	TYPE SSD_TYPE is array(N_SSDS-1 DOWNTO 0) of STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -46,7 +67,6 @@ ARCHITECTURE ex3 OF ex3 IS
 	--SIGNAL num_botoes: STD_LOGIC_VECTOR (N_BOTOES/2 DOWNTO 0);
 	SIGNAL doisEXPbotoes: STD_LOGIC_VECTOR (N_BOTOES DOWNTO 0); 
 	SIGNAL soma_final: INTEGER; 
-	SIGNAL digitos_unidade: STD_LOGIC_VECTOR (3 DOWNTO 0);
 	
 	SIGNAL s_ssds: SSD_TYPE;
 	SIGNAL s_digitos: DIG_TYPE;
@@ -66,7 +86,6 @@ BEGIN
 	-- ligacoes dos ssd
 	G1: FOR i IN 0 TO N_SSDS-1 GENERATE
 		ssds: entity work.hex2ssd port map (ent => s_digitos(i),saida => s_ssds(i));
-
 	END GENERATE G1;
 	
 	-------------------------------------------
