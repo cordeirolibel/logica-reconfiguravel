@@ -1,7 +1,6 @@
- 
------------------------------------------
--- Codificacao para display 7 segmentos
--- hexa to SSD
+---------------------------------------------------- 
+--1) Conte o número de entradas ligadas e acenda, em 
+--sequencia, os LEDs, baseado nessa contagem
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
