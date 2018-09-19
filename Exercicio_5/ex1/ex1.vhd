@@ -11,11 +11,10 @@ USE ieee.numeric_std.all;
 ENTITY ex1 IS
 	GENERIC(
 			N_CHAVES:  INTEGER := 10;
-			N_LEDS:  INTEGER := 10
 		);
 	PORT (
 		chaves: IN STD_LOGIC_VECTOR (N_CHAVES-1 DOWNTO 0);
-		leds: OUT STD_LOGIC_VECTOR (N_LEDS-1 DOWNTO 0)
+		leds: OUT STD_LOGIC_VECTOR (N_CHAVES-1 DOWNTO 0)
 		);
 END ENTITY;
 
@@ -33,7 +32,7 @@ BEGIN
 								port map (chaves => chaves,saida => num_chaves);		
 	-------------------------------------------
 	----- circuito
-	G1: FOR i IN 0 TO (N_LEDS - 1) GENERATE
+	G1: FOR i IN 0 TO (N_CHAVES - 1) GENERATE
 		leds(i) <= '1' WHEN to_integer(signed(num_chaves)) >= (i+1) ELSE
 					  '0';
 	END GENERATE;
