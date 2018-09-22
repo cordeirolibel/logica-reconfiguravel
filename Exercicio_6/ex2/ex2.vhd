@@ -1,5 +1,5 @@
 -- 2)	Construa	um	contador	sequencial	de	valores,
--- contando	de	meio	em	meio	segundo,	de	0	a	31	e,	então,	
+-- contando	de	meio	em	meio	segundo,	de	0	a	31	e,	entÃ£o,	
 -- voltando	a	0.
 
 LIBRARY ieee;
@@ -10,14 +10,14 @@ use IEEE.math_real.all;
 --16^S-1 > MAXIMO
 --2^(4S) > MAXIMO+1
 --4S > lg(MAXIMO+1)
--- S = ceil(lg(MAXIMO+1)/4)
+--S = ceil(lg(MAXIMO+1)/4)
 
 ENTITY ex2 IS
 	
 	GENERIC(
-			TEMPO:  INTEGER := 500;--milissegundos
+			TEMPO:  INTEGER := 200;--milissegundos
 			MINIMO: INTEGER := 5;
-			MAXIMO: INTEGER := 55;
+			MAXIMO: INTEGER := 55; --conta de valor minimo a maximo inclusive
 			PERIODO: INTEGER := 50000
 		);
 		
@@ -41,7 +41,7 @@ ARCHITECTURE ex2 OF ex2 IS
 	SIGNAL s_ssds: SSD_TYPE;
 	SIGNAL s_digitos: DIG_TYPE;
 
-	SIGNAL valor : INTEGER := 0;
+	SIGNAL valor : INTEGER := MINIMO;
 	
 BEGIN
 	
@@ -49,8 +49,9 @@ BEGIN
 	----- COMPONENTES
 
 	--covertendo numero de chaves ligados para um numero
-	es1: entity work.espera generic map (MS => TEMPO, periodo => PERIODO) 
-								   port map (saida => clk_int, clk => clk);
+	es1: entity work.espera generic map (MS => TEMPO, PERIODO => PERIODO) 
+						 	port map (saida_espera => clk_int, clk => clk);
+	
 	
 	-------------------------------------------
 	----- PROCESS
@@ -75,7 +76,7 @@ BEGIN
 
 	-- ligacoes dos ssd
 	G1: FOR i IN 0 TO N_SSDS-1 GENERATE
-		ssds: entity work.hex2ssd port map (ent => s_digitos(i),saida => s_ssds(i));
+		ssds: entity work.hex2ssd port map (ent => s_digitos(i),saida => s_ssds(N_SSDS-i-1));
 	END GENERATE G1;
 
 	-- ligacoes do sinal com a saida dos ssd
