@@ -1,5 +1,5 @@
 -- 2)	Construa	um	contador	sequencial	de	valores,
--- contando	de	meio	em	meio	segundo,	de	0	a	31	e,	entÃ£o,	
+-- contando	de	meio	em	meio	segundo,	de	0	a	31	e,	entÃƒÂ£o,	
 -- voltando	a	0.
 
 LIBRARY ieee;
@@ -15,10 +15,11 @@ use IEEE.math_real.all;
 ENTITY ex2 IS
 	
 	GENERIC(
-			TEMPO:  INTEGER := 200;--milissegundos
+			TEMPO:  INTEGER := 500;--milissegundos
 			MINIMO: INTEGER := 5;
 			MAXIMO: INTEGER := 55; --conta de valor minimo a maximo inclusive
-			PERIODO: INTEGER := 50000
+			PERIODO: INTEGER := 50000;
+			ALGARISMOS: INTEGER := 16
 		);
 		
 	PORT (		
@@ -38,9 +39,6 @@ ARCHITECTURE ex2 OF ex2 IS
 	-------------------------------------------
 	----- SIGNAL 
 	SIGNAL clk_int: STD_LOGIC;
-	SIGNAL s_ssds: SSD_TYPE;
-	SIGNAL s_digitos: DIG_TYPE;
-
 	SIGNAL valor : INTEGER := MINIMO;
 	
 BEGIN
@@ -52,6 +50,9 @@ BEGIN
 	es1: entity work.espera generic map (MS => TEMPO, PERIODO => PERIODO) 
 						 	port map (saida_espera => clk_int, clk => clk);
 	
+	qs1: entity work.quebraSSDs 
+	 		generic map (ALGARISMOS => ALGARISMOS, N_SSDS => N_SSDS) 
+			port map (o_ssds => o_ssds, valor => valor);
 	
 	-------------------------------------------
 	----- PROCESS
@@ -60,7 +61,7 @@ BEGIN
 	BEGIN
 		IF clk_int'EVENT AND clk_int='1' THEN
 			valor <= valor + 1;
-			IF valor > MAXIMO THEN
+			IF valor >= MAXIMO THEN
 				valor <= MINIMO;
 			END IF;
 		END IF;
@@ -69,19 +70,5 @@ BEGIN
 	-------------------------------------------
 	----- CIRCUITO
 
-	--separando digitos para o ssd
-	G3: FOR i IN 0 TO N_SSDS-1 GENERATE
-		s_digitos(i) <= std_logic_vector(to_unsigned(valor,4*N_SSDS))((i+1)*4-1 DOWNTO i*4);
-	END GENERATE G3;
 
-	-- ligacoes dos ssd
-	G1: FOR i IN 0 TO N_SSDS-1 GENERATE
-		ssds: entity work.hex2ssd port map (ent => s_digitos(i),saida => s_ssds(N_SSDS-i-1));
-	END GENERATE G1;
-
-	-- ligacoes do sinal com a saida dos ssd
-	G2: FOR i IN 0 TO N_SSDS-1 GENERATE
-		o_ssds(7*(i+1)-1 DOWNTO 7*i) <= s_ssds(i);
-	END GENERATE G2;
-	
 END ARCHITECTURE;  
