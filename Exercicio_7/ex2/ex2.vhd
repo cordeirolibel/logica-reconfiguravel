@@ -38,8 +38,12 @@ ARCHITECTURE ex2 OF ex2 IS
 	-------------------------------------------
 	----- SIGNAL 
 	SIGNAL clk_int: STD_LOGIC;
-	SIGNAL tempo: INTEGER;
+	SIGNAL tempo_max: INTEGER;
 	SIGNAL chaves_val: INTEGER;
+	SIGNAL pb_reverse: STD_LOGIC; --push button para reverse
+	SIGNAL pb1_tam: STD_LOGIC;--push button 1 para tamanho
+	SIGNAL pb2_tam: STD_LOGIC;--push button 1 para tamanho
+	--SIGNAL reset: STD_LOGIC;
 BEGIN
 	
 	-------------------------------------------
@@ -52,67 +56,101 @@ BEGIN
 	--covertendo numero de chaves ligados para um numero
 	c2h: entity work.chaves2hex generic map (N_CHAVES => 3) 
 								   port map (chaves => chaves_vel, saida => chaves_val);
+
+	--covertendo botoes para push buttons
+	pb1: entity work.pushButton port map (b_in => B_reverse, b_out => pb_reverse);
+	pb2: entity work.pushButton port map (b_in => b1_tam, b_out => pb1_tam);
+	pb3: entity work.pushButton port map (b_in => b2_tam, b_out => pb2_tam);
+
+	--st1: entity work.starter port map (clk => clk, saida => reset);
+
 	-------------------------------------------
 	----- PROCESS
-
-	PROCESS(all)  -- PROCESS(ALL)
-		--VARIABLE leds: STD_LOGIC_VECTOR (N_LEDS-1 DOWNTO 0) := (0 => '0',OTHERS => '1');
-		VARIABLE tam_minhoca: INTEGER RANGE 1 TO N_LEDS-1 := 1;
+	PROCESS(all) 
+		------------------ VARIABLES ------------------
+		-- informacoes da minhoca
+		VARIABLE tam_minhoca: INTEGER  := 1;
 		VARIABLE head: INTEGER := N_LEDS-1;
 		VARIABLE tail: INTEGER := 1;
+		-- estado anterior dos push buttons de tamanho da minhoca
+		VARIABLE ant_pb1_tam: STD_LOGIC := '0';
+		VARIABLE ant_pb2_tam: STD_LOGIC := '0';
+		-- tempo
 		VARIABLE tempo_i: INTEGER := 0;
+
 	BEGIN
-		IF rising_edge(clk_int) AND (tempo_i = tempo) THEN
-			-- atualizar a minhoca
-			IF (B_reverse = '1') THEN 
-				leds(tail) <= '0';
-				IF head = N_LEDS-1 THEN
-					head := 0;
-				ELSE
-					head := (head+1);
-				END IF;
-				IF tail = N_LEDS-1 THEN
-					tail := 0;
-				ELSE
-					tail := (tail+1);
-				END IF;
-				leds(head) <= '1';
-			ELSE
-				leds(head) <= '0';
-				IF head = 0 THEN
-					head := N_LEDS-1;
-				ELSE
-					head := (head-1);
-				END IF;
-				IF tail = 0 THEN
-					tail := N_LEDS-1;
-				ELSE
-					tail := (tail-1);
-				END IF;
-				leds(tail) <= '1';
-			END IF;
-		
-			IF(b1_tam = '1') THEN
-				tam_minhoca := tam_minhoca+1;
-				IF(tam_minhoca>N_LEDS-1) THEN
-					tam_minhoca := N_LEDS-1;
-				ELSE
+		IF rising_edge(clk_int) THEN
+			IF (tempo_i >= tempo_max) THEN
+			-------------- Atualizar a minhoca --------------
+				IF (pb_reverse = '1') THEN 
+					-- Para frente
+					leds(tail) <= '0';
+					IF head >= N_LEDS-1 THEN
+						head := 0;
+					ELSE
+						head := head+1;
+					END IF;
+					IF tail >= N_LEDS-1 THEN
+						tail := 0;
+					ELSE
+						tail := tail+1;
+					END IF;
 					leds(head) <= '1';
-					head := (head+1)MOD N_LEDS;
-				END IF;
-			END IF;
-			IF(b2_tam='1') THEN
-				tam_minhoca := tam_minhoca-1;
-				IF(tam_minhoca<=0) THEN
-					tam_minhoca := 1;
 				ELSE
-					head := (head-1)MOD N_LEDS;	
-					leds(head) <= '0'; 
+					-- Para tras
+					leds(head) <= '0';
+					IF head <= 0 THEN
+						head := N_LEDS-1;
+					ELSE
+						head := head-1;
+					END IF;
+					IF tail <= 0 THEN
+						tail := N_LEDS-1;
+					ELSE
+						tail := tail-1;
+					END IF;
+					leds(tail) <= '1';
 				END IF;
+			
+			-------------- Verifica Tamanho --------------
+				IF(ant_pb1_tam /= pb1_tam) THEN
+					-- Aumenta
+					ant_pb1_tam := pb1_tam;
+					tam_minhoca := tam_minhoca+1;
+					IF(tam_minhoca>(N_LEDS-1)) THEN
+						tam_minhoca := N_LEDS-1;
+					ELSE
+						--atualiza minhoca
+						IF head >= N_LEDS-1 THEN
+							head := 0;
+						ELSE
+							head := head+1;
+						END IF;
+						leds(head) <= '1';
+					END IF;
+				END IF;
+				IF(ant_pb2_tam /= pb2_tam) THEN
+					-- Diminui
+					ant_pb2_tam := pb2_tam;
+					tam_minhoca := tam_minhoca-1;
+					IF(tam_minhoca<=0) THEN
+						tam_minhoca := 1;
+					ELSE
+						--atualiza minhoca
+						leds(head) <= '0'; 
+						IF head <= 0 THEN
+							head := N_LEDS-1;
+						ElSE
+							head := head-1;
+						END IF;
+					END IF;
+				END IF;
+
+			------------- Controle de Tempo -------------
+				tempo_i := 0;
+			ElSE
+				tempo_i := tempo_i + TEMPO_DELTA;
 			END IF;
-			tempo_i := 0;
-		ELSIF rising_edge(clk_int) THEN
-			tempo_i := tempo_i + TEMPO_DELTA;
 		END IF;
 		
 	END PROCESS;
@@ -120,6 +158,6 @@ BEGIN
 	-------------------------------------------
 	----- CIRCUITO
 
-	tempo <= TEMPO_DELTA + chaves_val*TEMPO_DELTA;
+	tempo_max <= TEMPO_DELTA + chaves_val*TEMPO_DELTA;
 	
 END ARCHITECTURE;   
