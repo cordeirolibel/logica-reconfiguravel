@@ -14,12 +14,11 @@ USE ieee.Std_Logic_Arith.ALL;
 ------------------------------
 ENTITY chaves2hex IS
 	GENERIC(
-			N_CHAVES:  INTEGER := 4;
-			N_SAIDA: INTEGER := 3 -- N_CHAVES/2+1
+			N_CHAVES:  INTEGER := 4
 		);
 	PORT (
 		chaves: IN STD_LOGIC_VECTOR(N_CHAVES-1 DOWNTO 0);
-		saida: OUT STD_LOGIC_VECTOR(N_SAIDA-1 DOWNTO 0)
+		saida: OUT INTEGER
 		);
 END ENTITY;
 
@@ -39,6 +38,6 @@ BEGIN
 		somas_intermediarias(i) <= somas_intermediarias(i-1)+conv_integer(unsigned(zero&chaves(i+1)));
 	END GENERATE G1;
 
-	saida <= conv_std_logic_vector(somas_intermediarias(N_CHAVES-2),saida'length);
+	saida <= somas_intermediarias(N_CHAVES-2);
 
 END ARCHITECTURE;

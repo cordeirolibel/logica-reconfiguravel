@@ -11,6 +11,7 @@ ENTITY espera IS
 			  );
 	
 	PORT (clk: IN STD_LOGIC;
+		  enable: IN STD_LOGIC;
 			saida_espera: OUT STD_LOGIC);
 END ENTITY;
 ----------------------------------
@@ -21,7 +22,7 @@ BEGIN
 		--50000 porque a frequência é 50 MHz. Em 50000 clocks ele faz 1 ms
 		VARIABLE counter: INTEGER RANGE 0 TO integer(MS*PERIODO/2);
 	BEGIN
-		IF rising_edge(clk) THEN
+		IF (rising_edge(clk) AND enable='1')  THEN
 			counter := counter + 1;
 			IF counter = (integer(ms*periodo/2)-1) THEN
 				IF SIG='0' THEN
@@ -29,9 +30,9 @@ BEGIN
 				ELSE
 					sig <= '0';
 				END IF;
-				
 			END IF;
 		END IF;	
+		
 	END PROCESS;
 
 	saida_espera <= sig;
