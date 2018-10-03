@@ -58,9 +58,9 @@ BEGIN
 								   port map (chaves => chaves_vel, saida => chaves_val);
 
 	--covertendo botoes para push buttons
-	pb1: entity work.pushButton port map (b_in => B_reverse, b_out => pb_reverse);
-	pb2: entity work.pushButton port map (b_in => b1_tam, b_out => pb1_tam);
-	pb3: entity work.pushButton port map (b_in => b2_tam, b_out => pb2_tam);
+	pb1: entity work.pushButton port map (b_in => B_reverse, b_out => pb_reverse,clk=>clk);
+	pb2: entity work.pushButton port map (b_in => b1_tam, b_out => pb1_tam,clk=>clk);
+	pb3: entity work.pushButton port map (b_in => b2_tam, b_out => pb2_tam,clk=>clk);
 
 	--st1: entity work.starter port map (clk => clk, saida => reset);
 
@@ -69,7 +69,7 @@ BEGIN
 	PROCESS(all) 
 		------------------ VARIABLES ------------------
 		-- informacoes da minhoca
-		VARIABLE tam_minhoca: INTEGER  := 1;
+		VARIABLE tam_minhoca: INTEGER  := N_LEDS-1;
 		VARIABLE head: INTEGER := N_LEDS-1;
 		VARIABLE tail: INTEGER := 1;
 		-- estado anterior dos push buttons de tamanho da minhoca

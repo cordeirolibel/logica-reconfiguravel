@@ -14,14 +14,14 @@
 
 # Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 # File: C:\Users\gusta\Documents\MEGA\EngdeComputacao\Logica_Rec\Exercicios LR\Exercicio_7\ex2\ex2.csv
-# Generated on: Wed Sep 26 17:30:02 2018
+# Generated on: Wed Oct 03 17:11:02 2018
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
 
 To,Direction,Location,I/O Bank,VREF Group,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
 b1_tam,Input,PIN_H2,1,B1_N1,,,,,
 b2_tam,Input,PIN_G3,1,B1_N0,,,,,
-B_reverse,Input,PIN_D2,1,B1_N0,,,,,
+B_reverse,Input,PIN_F1,1,B1_N0,,,,,
 chaves_vel[2],Input,PIN_J6,1,B1_N0,,,,,
 chaves_vel[1],Input,PIN_H5,1,B1_N0,,,,,
 chaves_vel[0],Input,PIN_H6,1,B1_N0,,,,,
