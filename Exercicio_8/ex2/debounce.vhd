@@ -9,7 +9,7 @@ USE ieee.numeric_std.all;
 ENTITY debounce IS
 	
 	GENERIC(
-			TEMPO:  INTEGER := 50;--milissegundos
+			TEMPO:  INTEGER := 100;--milissegundos
 			PERIODO: INTEGER := 50000
 		);
 		
@@ -32,8 +32,8 @@ BEGIN
 	----- COMPONENTES
 
 	--inverte o sinal de saida depois do time
-	es1: entity work.espera generic map (MS => 1, PERIODO => PERIODO) 
-							port map (saida_espera => clk_int, clk => clk, enable => '1');
+	es1: entity work.EventEspera generic map (MS => 1, PERIODO => PERIODO) 
+							port map (saida => clk_int, clk => clk, enable => '1');
 
 	-------------------------------------------
 	----- PROCESS
@@ -47,7 +47,7 @@ BEGIN
 			count := count + 1;
 			--mudar a saida - 100ms
 			IF count = TEMPO THEN 
-				botao_out <= botao_in;
+				botao_out <= NOT botao_in;
 				count := 0;
 			END IF;
 			IF botao_in = ant THEN

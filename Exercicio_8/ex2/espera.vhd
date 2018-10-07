@@ -1,5 +1,5 @@
 -------------------------------
--- inverte o sinal de saida depois do time
+-- 	Faz uma clock na frequência desejada, em ms.
 ----------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -12,7 +12,7 @@ ENTITY espera IS
 	
 	PORT (clk: IN STD_LOGIC;
 		  enable: IN STD_LOGIC;
-			saida_espera: OUT STD_LOGIC);
+		  saida_espera: OUT STD_LOGIC);
 END ENTITY;
 ----------------------------------
 ARCHITECTURE espera OF espera IS
@@ -25,15 +25,10 @@ BEGIN
 		IF (rising_edge(clk) AND enable='1')  THEN
 			counter := counter + 1;
 			IF counter = (integer(ms*periodo/2)-1) THEN
-				IF SIG='0' THEN
-					sig <= '1';
-				ELSE
-					sig <= '0';
-				END IF;
+				saida_espera <= 1
+			ELSE
+				saida_espera <= 0
 			END IF;
 		END IF;	
-		
 	END PROCESS;
-
-	saida_espera <= sig;
 END ARCHITECTURE;
