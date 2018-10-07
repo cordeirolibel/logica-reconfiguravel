@@ -15,7 +15,7 @@ ENTITY ex1 IS
 	
 	GENERIC(
 			MINIMO: INTEGER := -11;
-			MAXIMO: INTEGER := 9
+			MAXIMO: INTEGER := 12
 		);
 		
 	PORT (		
@@ -48,9 +48,9 @@ BEGIN
 
 	-- manda um inteiro positivo e exibe nos SSDs
 	-- nÃƒÂ£o mando o ssd de sinal
-	qs1: entity work.quebraSSDs 
-	 		generic map ( N_SSDS => N_SSDS-1) --ALGARISMOS => 10,
-			port map (o_ssds => o_ssds((N_SSDS-1)*7-1 DOWNTO 0) , valor => abs(valor));
+	qs1: entity work.UquebraSSDs 
+	 		generic map ( N_SSDS => N_SSDS) --ALGARISMOS => 10,
+			port map (o_ssds => o_ssds , valor => valor);
 
 	-------------------------------------------
 	----- PROCESS
@@ -79,11 +79,6 @@ BEGIN
 	
 	-------------------------------------------
 	----- CIRCUITO
-	--display de sinal
-	--tudo zerado
-	o_ssds(N_SSDS*7-1-1 DOWNTO (N_SSDS-1)*7+1-1) <= (OTHERS => '1');
-	--menos o sinal
-	o_ssds(N_SSDS*7-1) <= '1' WHEN valor>0 ELSE
-						       '0';
+
 	
 END ARCHITECTURE;     
