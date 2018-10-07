@@ -14,17 +14,18 @@
 
 # Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 # File: C:\Users\gusta\Documents\MEGA\EngdeComputacao\Logica_Rec\Exercicios LR\testes\testes.csv
-# Generated on: Sun Oct 07 12:46:49 2018
+# Generated on: Sun Oct 07 11:18:38 2018
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
 
 To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
-botao1,Input,PIN_H2,1,B1_N1,PIN_M5,,,,,
-botao2,Input,PIN_G3,1,B1_N0,PIN_G14,,,,,
+botao1,Input,PIN_H2,1,B1_N1,PIN_H2,,,,,
+botao2,Input,PIN_G3,1,B1_N0,PIN_G3,,,,,
 chave,Input,PIN_J6,1,B1_N0,PIN_J6,,,,,
 clk,Input,PIN_G21,6,B6_N1,PIN_G21,,,,,
 led1,Output,PIN_J1,1,B1_N1,PIN_J1,,,,,
 led2,Output,PIN_J2,1,B1_N1,PIN_J2,,,,,
 led3,Output,PIN_J3,1,B1_N1,PIN_J3,,,,,
-led4,Output,PIN_H1,1,B1_N1,PIN_H14,,,,,
-botao,Unknown,,,,,,,,,
+led4,Output,PIN_H1,1,B1_N1,PIN_H1,,,,,
+led5,Output,PIN_F2,1,B1_N0,PIN_Y10,,,,,
+led6,Output,PIN_E1,1,B1_N0,PIN_AA10,,,,,

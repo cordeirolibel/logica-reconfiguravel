@@ -1,6 +1,6 @@
 -------------------------------
--- Gera um pulso se o botÃ£o estiver apertado. SÃ³ comparar
--- se b_out vale '1' num IF para utilizar.
+-- Cria um ciclo de roleta de 
+-- MINIMO ate MAXIMO para cada clk
 ----------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -18,8 +18,8 @@ END ENTITY;
 ARCHITECTURE roleta OF roleta IS
 
 BEGIN
-	PROCESS(clk)
-		VARIABLE temp: INTEGER RANGE MINIMO TO MAXIMO;
+	PROCESS(all)
+		VARIABLE temp: INTEGER := MINIMO;
 	BEGIN
 		IF (rising_edge(clk)) THEN
 			IF(temp >= MAXIMO) THEN
@@ -27,7 +27,7 @@ BEGIN
 			ELSE
 				temp := temp + 1;
 			END IF;
-		r_num <= temp;
+			r_num <= temp;
 		END IF;
 	END PROCESS;
 END ARCHITECTURE;
