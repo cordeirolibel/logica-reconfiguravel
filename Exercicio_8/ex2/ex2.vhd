@@ -27,7 +27,6 @@ ENTITY ex2 IS
 	GENERIC(
 			MAX_POINTS: INTEGER := 3;
 			N_LEDS: INTEGER := 8;
-			SEED: INTEGER := 77;
 			TEMPO_DELTA:INTEGER := 200 --ms
 		);
 		
@@ -131,7 +130,7 @@ BEGIN
 	--leds
 	G1: FOR i IN 0 TO N_LEDS-1 GENERATE
 		leds(i) <= '1' WHEN i=pos_leds ELSE
-				     '0';
+				   '0';
 	END GENERATE G1;
 	
 	-- [2*TEMPO_DELTA,(MAX_POINTS+2)*TEMPO_DELTA]
