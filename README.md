@@ -9,3 +9,5 @@ utilizando CPLD e FPGA. Desenvolvimento de projetos de circuitos lógicos combin
 Desenvolvimento de projetos de circuitos lógicos sequenciais. Desenvolvimento de projetos
 utilizando a técnica de máquinas de estados.
 
+<img src="placa.jpeg" width="400">
+
