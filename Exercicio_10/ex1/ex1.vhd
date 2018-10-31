@@ -21,7 +21,6 @@ begin
 	--FSM state register:
 	process (clk, rst)
 	begin
-		-- rst esta em 1 porque é invertido.
 		if rst='0' then --see Note 2 above on boolean tests
 			pr_state <= ini;
 				ledR <= '1';

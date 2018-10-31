@@ -14,15 +14,16 @@
 
 # Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 # File: C:\Users\Andreas\Dropbox\UTFPR\2018-2\Lógica Reconfigurável\logica-reconfiguravel\Exercicio_10\ex1\ex1.csv
-# Generated on: Wed Oct 31 18:30:55 2018
+# Generated on: Wed Oct 31 18:57:07 2018
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
 
-To,Direction,Location,I/O Bank,VREF Group,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
-CA,Input,PIN_H6,1,B1_N0,,,,,
-CD,Input,PIN_J6,1,B1_N0,,,,,
-CE,Input,PIN_H5,1,B1_N0,,,,,
-clk_placa,Input,PIN_G21,6,B6_N1,,,,,
-ledD,Output,PIN_J1,1,B1_N1,,,,,
-ledE,Output,PIN_J2,1,B1_N1,,,,,
-rst,Input,PIN_H2,1,B1_N1,,,,,
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
+CA,Input,PIN_H6,1,B1_N0,PIN_H6,,,,,
+CD,Input,PIN_J6,1,B1_N0,PIN_J6,,,,,
+CE,Input,PIN_H5,1,B1_N0,PIN_H5,,,,,
+clk,Input,PIN_G21,6,B6_N1,PIN_G21,,,,,
+ledD,Output,PIN_J1,1,B1_N1,PIN_J1,,,,,
+ledE,Output,PIN_J2,1,B1_N1,PIN_J2,,,,,
+ledR,Output,PIN_B1,1,B1_N0,PIN_B1,,,,,
+rst,Input,PIN_H2,1,B1_N1,PIN_H2,,,,,
