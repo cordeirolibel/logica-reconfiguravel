@@ -1,0 +1,16 @@
+Est_atual,Bd,Dig,Bt,Est_prox,,Est_atual,ab,l1,l2,l3
+x,x,x,1,fechado,,aberto,1,1,1,1
+aberto,x,x ,0,aberto,,fechado,0,0,0,0
+fechado,0,x,0,fechado,,digito1,0,1,0,0
+fechado,1,C1,0,digito1,,digito2,0,1,1,0
+fechado,1,x-{C1},0,falha1,,falha1,0,1,0,0
+digito1,0,x,0,digito1,,falha2,0,1,1,0
+digito1,1,C2,0,digito2,,,,,,
+digito1,1,x-{C2},0,falha2,,,,,,
+digito2,0,x,0,digito2,,,,,,
+digito1,1,C3,0,aberto,,,,,,
+digito1,1,x-{C3},0,fechado,,,,,,
+falha1,0,x,0,falha1,,,,,,
+,1,x,0,falha2,,,,,,
+falha1,0,x,0,falha2,,,,,,
+,1,x,0,fechado,,,,,,
