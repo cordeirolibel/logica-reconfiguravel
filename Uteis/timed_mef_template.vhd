@@ -14,7 +14,7 @@ ARCHITECTURE <archit_name> OF <entity_name> IS
 	--Timer-related declarations:
 	CONSTANT T1: NATURAL := <value>;
 	CONSTANT T2: NATURAL := <value>; ...
-	CONSTANT tmax: NATURRAL := <value>;
+	CONSTANT tmax: NATURAL := <value>;
 	SIGNAL t: NATURAL RANGE 0 TO tmax;
 
 BEGIN
@@ -28,6 +28,6 @@ BEGIN
 		t <= 0;
 		ELSIF t /= tmax THEN
 			t <= t + 1;
-		ENF IF;
+		END IF;
 	END IF;
 END PROCESS;
