@@ -25,7 +25,7 @@ begin
 process (clk, rst)
 begin
 	if rst='1' then --see Note 2 above on boolean tests
-		pr_state < = A;
+		pr_state <= A;
 	elsif rising_edge(clk) then
 		pr_state < = nx_state;
 	end if;
