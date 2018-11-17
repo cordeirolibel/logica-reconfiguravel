@@ -7,7 +7,7 @@ USE ieee.std_logic_1164.all;
 
 ----------------------------------
 ENTITY eventButton IS
-	GENERIC(TEMPO_DEBOUNCE:  INTEGER := 20;--milissegundos
+	GENERIC(TEMPO_DEBOUNCE:  INTEGER := 50;--milissegundos
 			PERIODO: INTEGER := 50000
 			);
 

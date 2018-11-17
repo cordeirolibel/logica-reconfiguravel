@@ -9,7 +9,7 @@ USE ieee.numeric_std.all;
 ENTITY debounce IS
 	
 	GENERIC(
-			TEMPO:  INTEGER := 20;--milissegundos
+			TEMPO:  INTEGER := 100;--milissegundos
 			PERIODO: INTEGER := 50000
 		);
 		
@@ -46,7 +46,7 @@ BEGIN
 		IF rising_edge(clk_int)  THEN
 			count := count + 1;
 			--mudar a saida - 100ms
-			IF count >= TEMPO THEN 
+			IF count = TEMPO THEN 
 				botao_out <= NOT botao_in;
 				count := 0;
 			END IF;
